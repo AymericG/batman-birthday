@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <style>
+            body {
+                background-color: #010A27;
+                color: #fff;
+            }
+
+            .letter {
+                border: 1px solid #fff;
+                padding: 20px;
+                text-transform: uppercase;
+            }
+            .panel {
+                display: flex;
+                font-size: 160px;
+                justify-content: center;
+            }
+
+            .avatar {
+                margin: 40px 0;
+            }
+
+            button {
+                margin-top: 10px;
+                font-size: 100px;
+            }
+
+            .success {
+                display: none;
+                background-color: #fff;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                justify-content: center;
+                align-items: center;
+                background-image: url('batman-approves.jpg');
+            }
+
+            .success img {
+                opacity: 0.9;
+            }
+
+            .centered { text-align: center; }
+        </style>
+
+        <script>
+            function onLetterClick(target) {
+                var alphabet = "abcdefghijklmnopqrstuvwxyz";
+                var currentCharacter = target.innerText;
+                var position = alphabet.indexOf(currentCharacter.toLowerCase());
+                position++;
+                if (position == alphabet.length) {
+                    position = 0;
+                }
+                target.innerText = alphabet[position];
+            }
+
+            function onDefuseClick(target) {
+                var letters = document.getElementsByClassName("letter");
+                var result = Array.from(letters).map(x => x.innerText).join('');
+                if (result == 'FREEZE') {
+                    var success = document.getElementById('success');
+                    success.style = 'display: flex;';
+                }
+            }
+        </script>
+
+    </head>
+    <body>
+        <div class="content">
+            <div class="centered"><img src="freeze.png" class="avatar" height="128" /></div>
+            <div class="panel">
+                <div class="letter" onClick="onLetterClick(this)">f</div>
+                <div class="letter" onClick="onLetterClick(this)">r</div>
+                <div class="letter" onClick="onLetterClick(this)">e</div>
+                <div class="letter" onClick="onLetterClick(this)">e</div>
+                <div class="letter" onClick="onLetterClick(this)">z</div>
+                <div class="letter" onClick="onLetterClick(this)">e</div>
+            </div>
+            <div class="centered"><button onClick="onDefuseClick(this)"><img src="defuse.png" width="80"/>DEFUSE</button></div>
+        </div>
+
+        <div class="success" id='success'>
+        </div>
+    </body>
+</html>
