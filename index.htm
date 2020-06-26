@@ -29,7 +29,7 @@
                 border-radius: 0;
             }
 
-            .success {
+            .success, #failure {
                 display: none;
                 background-color: #fff;
                 position: absolute;
@@ -39,11 +39,14 @@
                 right: 0;
                 justify-content: center;
                 align-items: center;
+            }
+
+            .success {
                 background-image: url('batman-approves.jpg');
             }
 
-            .success img {
-                opacity: 0.9;
+            #failure {
+                background-image: url('failure0.jpg');
             }
 
             .centered { text-align: center; }
@@ -64,9 +67,13 @@
             function onDefuseClick(target) {
                 var letters = document.getElementsByClassName("letter");
                 var result = Array.from(letters).map(x => x.innerText).join('');
-                if (result == 'FREEZE') {
+                if (result == 'BATMAN') {
                     var success = document.getElementById('success');
                     success.style = 'display: flex;';
+                } else {
+                    var failure = document.getElementById('failure');
+                    var randomIndex = Math.floor(Math.random() * 4);
+                    failure.style = "display: flex; background-image: url('failure" + randomIndex + ".jpg')";
                 }
             }
         </script>
@@ -85,8 +92,7 @@
             </div>
             <div class="centered"><button onClick="onDefuseClick(this)"><img src="defuse.png" width="80"/>DEFUSE</button></div>
         </div>
-
-        <div class="success" id='success'>
-        </div>
+        <div id='failure' onClick="this.style=''"></div>
+        <div class="success" id='success'></div>
     </body>
 </html>
